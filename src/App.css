@@ -1,38 +1,123 @@
-.App {
-  text-align: center;
+body,
+html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.container-fluid {
+    display: flex;
+    height: 100vh;
+    flex-direction: column;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.header,
+.footer {
+    background-color: #4350B3;
+    color: white;
+    padding: 20px;
+    text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.login-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #9b969f;
+    background-image: url('./images/cambio.jpg');
+    /* Caminho para a imagem de fundo */
+    background-size: cover;
+    /* Cobrir a tela inteira */
 }
 
-.App-link {
-  color: #61dafb;
+.login-box {
+    background: #cfced1;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.login-box img {
+    max-width: 100px;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #4350B3;
+    border-color: #4350B3;
+}
+
+/* Adicione estas classes ao seu arquivo CSS */
+.notification {
+    position: absolute;
+    top: 300px;
+    /* Ajuste conforme necessário */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.notification.success {
+    background-color: #4caf50;
+    /* Verde para mensagens positivas */
+}
+
+.notification.error {
+    background-color: #f44336;
+    /* Vermelho para mensagens negativas */
+}
+
+/* Adicione este estilo ao seu arquivo CSS */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #4350B3;
+    color: white;
+    position: relative;}
+
+.header .user-info {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    /* Empurra o conteúdo para a direita */
+}
+
+/* Estilo para o menu do admin */
+.admin-menu {
+    margin-left: 20px;
+    padding: 5px;
+    font-size: 16px;
+}
+
+/* Estilo do menu na header */
+.header-menu {
+    width: 250px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 15px;
+    border: none;
+    background-color: #e0e0e0;
+    /* Fundo cinza */
+    margin-left: 20px;
+    box-shadow: 0 4px 6px #4350B3;
+    appearance: none;
+    text-align: center;
+}
+
+/* Remover a seta padrão do select */
+.header-menu::after {
+    content: '▼';
+    position: absolute;
+    right: 10px;
+    pointer-events: none;
 }
