@@ -1,0 +1,61 @@
+.form-inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.form-inline .form-group {
+    position: relative;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.form-inline input[type="text"],
+.form-inline input[type="email"],
+.form-inline input[type="password"] {
+    padding: 1px 8px;  /* 0.5rem; */
+    /* Diminui o padding para reduzir a altura */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    font-size: 0.9rem;
+    /* Reduz um pouco o tamanho da fonte para ajustar à nova altura */
+}
+
+.form-inline input:focus,
+.form-inline input:not(:placeholder-shown) {
+    border-color: #007bff;
+}
+
+.form-inline label {
+    position: absolute;
+    top: 50%;
+    left: 0.5rem;
+    transform: translateY(-50%);
+    background: white;
+    padding: 0 0.25rem;
+    color: #999;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.form-inline input:focus+label,
+.form-inline input:not(:placeholder-shown)+label {
+    top: 0;
+    left: 0.5rem;
+    font-size: 0.7rem;
+    color: #007bff;
+}
+
+.btn-submit {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;/* 0.5rem 1rem;*/
+    /* Ajusta o padding do botão para combinar com a nova altura dos inputs */
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 0rem;
+    align-self: flex-start;
+}
