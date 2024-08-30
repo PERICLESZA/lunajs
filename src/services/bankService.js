@@ -1,46 +1,43 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/api/banks'; // Atualize o URL conforme necessário
+const API_URL = 'http://localhost:3001/api/banks';
+
+// const getBanks = async () => {
+//     // alert('entrei o bankService/getBanks')
+//     const response = await axios.get(API_URL);
+//     alert("bankService: ")
+//     return response.data.data; // Ajuste para acessar os dados corretamente
+// };
 
 const getBanks = async () => {
   try {
     const response = await axios.get(API_URL);
-    return response.data;
+    // alert("Resposta da API:", response.data.data); // Verifique a estrutura aqui
+    return response.data.data; // Ajuste o caminho conforme a estrutura da resposta
   } catch (error) {
-    throw new Error('Erro banco bankService: ' + error.message);
+    console.error("Erro ao buscar bancos:", error);
+    throw error;
   }
 };
 
-const addBank = async (bankData) => {
-  try {
-    const response = await axios.post(API_URL, bankData);
-    return response.data;
-  } catch (error) {
-    throw new Error('Erro ao adicionar banco: ' + error.message);
-  }
+const addBank = async (bank) => {
+    const response = await axios.post(API_URL, { name: bank.name });
+    return response.data.id;
 };
 
-const updateBank = async (id, bankData) => {
-  try {
-    const response = await axios.put(`${API_URL}/${id}`, bankData);
-    return response.data;
-  } catch (error) {
-    throw new Error('Erro ao atualizar banco: ' + error.message);
-  }
+const updateBank = async (id, bank) => {
+    const response = await axios.put(`${API_URL}/${id}`, { name: bank.name });
+    return response.data.message;
 };
 
 const deleteBank = async (id) => {
-  try {
     const response = await axios.delete(`${API_URL}/${id}`);
-    return response.data;
-  } catch (error) {
-    throw new Error('Erro ao excluir banco: ' + error.message);
-  }
+    return response.data.message;
 };
 
 export default {
-  getBanks,
-  addBank,
-  updateBank,
-  deleteBank,
+    getBanks,
+    addBank,
+    updateBank,
+    deleteBank
 };

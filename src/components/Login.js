@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import '../App.css';
-import authService from '../services/authService';
 import Bank from './Bank';
+import CadLogin from './CadLogin';
+import authService from '../services/authService';
 
 class Login extends Component {
   constructor(props) {
     super(props);
+    // Define os valores padrão para username e password
     this.state = { 
-      username: '', 
-      password: '', 
+      username: 'admin', 
+      password: '@senha*', 
       loggedIn: false, 
       isAdmin: false, 
       message: '', 
@@ -120,7 +122,7 @@ class Login extends Component {
             {message}
           </div>
         )}
-        <div className="login-container">
+        <div className="loginAuth-container">
           {!loggedIn && (
             <div className="login-box">
               <h2>Login</h2>
@@ -149,9 +151,8 @@ class Login extends Component {
               </form>
             </div>
           )}
-          {loggedIn && selectedMenu === 'Bank' && (
-            <Bank />
-          )}
+          {loggedIn && selectedMenu === 'Bank' && (<Bank />)}
+          {loggedIn && selectedMenu === 'Login' && (<CadLogin />)}
         </div>
         <div className="footer">© 2024 Agência de Câmbio</div>
       </div>
