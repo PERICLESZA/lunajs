@@ -3,10 +3,13 @@ import mysql from 'mysql2/promise';
 // Cria a conexão com o banco de dados
 const db = await mysql.createConnection({
   host: 'mysql.cedroinfo.com.br',
-  port: '3306',
   user: 'cedroibr7',
   password: 'Acd3590t',
-  database: 'cedroibr7'
+  database: 'cedroibr7',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0,
+  connectTimeout: 10000  // tempo em milissegundos
 });
 
 try {
