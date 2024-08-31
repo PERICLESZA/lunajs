@@ -7,8 +7,10 @@ html {
 
 .container-fluid {
     display: flex;
-    height: 100vh;
     flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+    /* Impede o scroll no corpo principal */
 }
 
 .header,
@@ -17,18 +19,20 @@ html {
     color: white;
     padding: 20px;
     text-align: center;
+    flex-shrink: 0;
+    /* Evita que o header e o footer encolham */
 }
 
 .loginAuth-container {
     flex: 1;
+    overflow-y: auto;
+    /* Permite o scroll apenas nessa área */
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: #9b969f;
     background-image: url('./images/cambio.jpg');
-    /* Caminho para a imagem de fundo */
     background-size: cover;
-    /* Cobrir a tela inteira */
 }
 
 .login-box {
@@ -41,21 +45,14 @@ html {
     text-align: center;
 }
 
-.login-box img {
-    max-width: 100px;
-    margin-bottom: 20px;
-}
-
 .btn-primary {
     background-color: #4350B3;
     border-color: #4350B3;
 }
 
-/* Adicione estas classes ao seu arquivo CSS */
 .notification {
     position: absolute;
     top: 300px;
-    /* Ajuste conforme necessário */
     left: 50%;
     transform: translateX(-50%);
     color: white;
@@ -67,15 +64,12 @@ html {
 
 .notification.success {
     background-color: #4caf50;
-    /* Verde para mensagens positivas */
 }
 
 .notification.error {
     background-color: #f44336;
-    /* Vermelho para mensagens negativas */
 }
 
-/* Adicione este estilo ao seu arquivo CSS */
 .header {
     display: flex;
     justify-content: space-between;
@@ -83,23 +77,15 @@ html {
     padding: 20px;
     background-color: #4350B3;
     color: white;
-    position: relative;}
+    position: relative;
+}
 
 .header .user-info {
     display: flex;
     align-items: center;
     margin-left: auto;
-    /* Empurra o conteúdo para a direita */
 }
 
-/* Estilo para o menu do admin */
-.admin-menu {
-    margin-left: 20px;
-    padding: 5px;
-    font-size: 16px;
-}
-
-/* Estilo do menu na header */
 .header-menu {
     width: 250px;
     padding: 10px;
@@ -107,14 +93,12 @@ html {
     border-radius: 15px;
     border: none;
     background-color: #e0e0e0;
-    /* Fundo cinza */
     margin-left: 20px;
     box-shadow: 0 4px 6px #4350B3;
     appearance: none;
     text-align: center;
 }
 
-/* Remover a seta padrão do select */
 .header-menu::after {
     content: '▼';
     position: absolute;

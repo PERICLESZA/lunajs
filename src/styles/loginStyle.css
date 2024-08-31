@@ -24,7 +24,7 @@
 
 .form-inline input:focus,
 .form-inline input:not(:placeholder-shown) {
-    border-color: #007bff;
+    border-color: #4350B3;
 }
 
 .form-inline label {
@@ -45,11 +45,11 @@
     top: 0;
     left: 0.5rem;
     font-size: 0.7rem;
-    color: #007bff;
+    color: #4350B3;
 }
 
 .btn-submit {
-    background-color: #007bff;
+    background-color: #4350B3;
     color: white;
     border: none;
     padding: 6px 12px;/* 0.5rem 1rem;*/

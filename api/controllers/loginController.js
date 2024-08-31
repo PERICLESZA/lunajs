@@ -68,6 +68,7 @@ const deleteLogin = async (req, res) => {
 };
 
 // Função para validar o login
+// Função para validar o login
 const validateLogin = async (req, res) => {
   const { username, password } = req.body;
   try {
@@ -76,7 +77,11 @@ const validateLogin = async (req, res) => {
       const hashedPassword = result[0].senha;
       const isMatch = await bcrypt.compare(password, hashedPassword);
       if (isMatch) {
-        res.send({ success: true, message: 'Login bem-sucedido' });
+        res.send({ 
+          success: true, 
+          message: 'Login bem-sucedido',
+          profile: result[0].perfil // Retorna o perfil do usuário
+        });
       } else {
         res.send({ success: false, message: 'Credenciais inválidas' });
       }
@@ -87,6 +92,7 @@ const validateLogin = async (req, res) => {
     res.status(500).send({ success: false, message: 'Erro no banco de dados' });
   }
 };
+
 
 export default {
   getAllLogins,

@@ -7,19 +7,21 @@ import authService from '../services/authService';
 class Login extends Component {
   constructor(props) {
     super(props);
-    // Define os valores padrão para username e password
     this.state = { 
       username: 'admin', 
       password: '@senha*', 
       loggedIn: false, 
-      isAdmin: false, 
+      profile: '', 
       message: '', 
       messageType: '', 
       selectedMenu: '' 
     };
-    this.menu = [
+    this.adminMenu = [
       "Exchange", "Bank", "City", "Class", "Country", "Customer",
       "Identification", "Login", "Parameter", "PercentCheck", "Status", "StoreIP", "Report", "Logout"
+    ];
+    this.userMenu = [
+      "Exchange", "City", "Country", "Customer", "Logout"
     ];
   }
 
@@ -36,9 +38,10 @@ class Login extends Component {
       const { username, password } = this.state;
       const response = await authService.login({ username, password });
       if (response.success) {
+        const userProfile = response.profile; // Obtém o perfil do usuário
         this.setState({
           loggedIn: true,
-          isAdmin: username === 'admin' || username === 'Admin'
+          profile: userProfile
         });
         this.showMessage('Login successful!', 'success');
       } else {
@@ -98,17 +101,17 @@ class Login extends Component {
   }
 
   render() {
-    const { username, password, loggedIn, isAdmin, message, messageType, selectedMenu } = this.state;
-
+    const { username, password, loggedIn, profile, message, messageType, selectedMenu } = this.state;
     return (
       <div className="container-fluid">
         <div className="header">
           <div className="header-title">Luna Travel</div>
-          {loggedIn && isAdmin && (
+          {loggedIn && (
             <>
               <select onChange={this.handleMenuChange} className="header-menu">
                 <option value="">Select an option</option>
-                {this.menu.map(option => (
+                
+                {(profile === 'A' ? this.adminMenu : this.userMenu).map(option => (
                   <option key={option} value={option}>{option}</option>
                 ))}
               </select>
