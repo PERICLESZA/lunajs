@@ -1,0 +1,178 @@
+
+.country-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 90%;
+    overflow: hidden;
+    /* Oculta o overflow para evitar rolagem externa */
+    display: flex;
+    flex-direction: column
+    /* Ajusta a altura;*/
+}
+
+.title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.notification {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.country-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    flex: 1;
+    margin-right: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+.form-group input {
+    height: 40px;
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn-submit {
+    padding: 10px 20px;
+    background-color: #4350B3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.btn-submit:hover {
+    background-color: #4350B3;
+}
+
+.country-grid {
+    flex: 1;
+    /* Permite que a grid ocupe o espaço restante disponível */
+    overflow-y: auto;
+    /* Permite rolar verticalmente se necessário */
+}
+
+.country-grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.country-grid th,
+.country-grid td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.country-grid th {
+    background-color: #4350B3;
+    color: white;
+}
+
+.country-grid tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.country-grid tr:hover {
+    background-color: #ddd;
+}
+
+.btn-edit,
+.btn-delete {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-edit {
+    background-color: #ffc107;
+    color: white;
+    margin-right: 5px;
+}
+
+.btn-edit:hover {
+    background-color: #e0a800;
+}
+
+.btn-delete {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn-delete:hover {
+    background-color: #c82333;
+}
+
+.action-icon {
+    font-size: 20px;
+    cursor: pointer;
+    margin: 0 10px;
+    color: #4350B3;
+}
+
+.action-icon:hover {
+    color: #0056b3;
+}
+
+.notification.warning {
+    background-color: #f5eada;
+}
+
+.notification-buttons {
+    margin-top: 10px;
+}
+
+.btn-confirm,
+.btn-cancel {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-confirm {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.btn-cancel {
+    background-color: #f44336;
+    color: #fff;
+}

@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import '../App.css';
-import Bank from './Bank';
-import CadLogin from './CadLogin';
+import '../styles/customerStyle.css'
 import authService from '../services/authService';
+import CadLogin from './CadLogin';
+import Bank from './Bank';
+import City from './City';
+import Class from './Class';
+import Country from './Country';
+import Customer from './Customer';
 
 class Login extends Component {
   constructor(props) {
@@ -156,6 +161,10 @@ class Login extends Component {
           )}
           {loggedIn && selectedMenu === 'Bank' && (<Bank />)}
           {loggedIn && selectedMenu === 'Login' && (<CadLogin />)}
+          {loggedIn && selectedMenu === 'City' && (<City />)}
+          {loggedIn && selectedMenu === 'Class' && (<Class />)}
+          {loggedIn && selectedMenu === 'Country' && (<Country />)}
+          {loggedIn && selectedMenu === 'Customer' && (<Customer />)}
         </div>
         <div className="footer">© 2024 Agência de Câmbio</div>
       </div>

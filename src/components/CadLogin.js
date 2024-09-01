@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import cadLoginService from '../services/cadLoginService';
-import "../styles/bankStyle.css"; // Reutilizando o estilo de Bank
 import "../styles/loginStyle.css"; // Reutilizando o estilo de Bank
 import { FaEdit, FaTrashAlt } from 'react-icons/fa';
 
@@ -102,7 +101,7 @@ class CadLogin extends Component {
     render() {
         const { formData, notification, logins } = this.state;
         return (
-            <div className="bank-container">
+            <div className="login-container">
                 {notification.message && (
                     <div className={`notification ${notification.type}`}>
                         {notification.message}
@@ -115,7 +114,7 @@ class CadLogin extends Component {
                     </div>
                 )}
                 <h2 className="title">Logins Register</h2>
-                <form onSubmit={this.handleSubmit} className="bank-form">
+                <form onSubmit={this.handleSubmit} className="login-form">
                     <div className="form-inline">
                         <div className="form-group">
                             <input
@@ -192,7 +191,7 @@ class CadLogin extends Component {
                         </button>
                     </div>
                 </form>
-                <div className="bank-grid">
+                <div className="login-grid">
                     <table>
                         <thead>
                             <tr>

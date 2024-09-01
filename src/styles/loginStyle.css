@@ -1,3 +1,64 @@
+.login-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 90%;
+    overflow: hidden;
+    /* Oculta o overflow para evitar rolagem externa */
+    display: flex;
+    flex-direction: column
+        /* Ajusta a altura;*/
+}
+
+.login-grid {
+    flex: 1;
+    /* Permite que a grid ocupe o espaço restante disponível */
+    overflow-y: auto;
+    /* Permite rolar verticalmente se necessário */
+}
+
+.login-grid {
+    flex: 1;
+    /* Permite que a grid ocupe o espaço restante disponível */
+    overflow-y: auto;
+    /* Permite rolar verticalmente se necessário */
+}
+
+.login-grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.login-grid th,
+.login-grid td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: center;
+}
+
+.login-grid th {
+    background-color: #4350B3;
+    color: white;
+}
+
+.login-grid tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.login-grid tr:hover {
+    background-color: #ddd;
+}
+
+.login-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
 .form-inline {
     display: flex;
     flex-wrap: wrap;

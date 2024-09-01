@@ -1,0 +1,137 @@
+.customer-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    height: 90%;
+    overflow: hidden;
+    /* Oculta o overflow para evitar rolagem externa */
+    display: flex;
+    flex-direction: column
+        /* Ajusta a altura;*/
+}
+
+.customer-container .title {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.customer-container .customer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.customer-container .form-inline {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.customer-container label {
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.customer-container input {
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    flex: 1;
+}
+
+.customer-container .btn-submit {
+    padding: 8px 16px;
+    background-color: #4350B3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.customer-container .btn-submit:hover {
+    background-color: #303878;
+}
+
+.customer-container .customer-grid table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.customer-container .customer-grid th,
+.customer-container .customer-grid td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+.customer-container .customer-grid th {
+    background-color: #4350B3;
+    color: #fff;
+}
+
+.customer-container .customer-grid td {
+    background-color: #fff;
+}
+
+.customer-container .action-icon {
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    color: #4350B3;;
+}
+
+.customer-container .action-icon:hover {
+    color: #4350B3;
+        
+}
+
+.notification {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.notification.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.notification.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.notification.warning {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.notification-buttons {
+    margin-top: 10px;
+}
+
+.notification-buttons .btn-confirm {
+    background-color: #4350B3;
+    color: #fff;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.notification-buttons .btn-cancel {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}

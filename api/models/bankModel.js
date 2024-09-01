@@ -3,7 +3,6 @@ import db from '../config/db.js'; // Certifique-se de que a extensão está corr
 const getAllBanks = async () => {
   try {
     const [rows] = await db.query('SELECT * FROM bank');
-    console.log('Resultado da consulta:', rows);
     return rows;
   } catch (err) {
     console.error('Erro ao buscar bancos:', err);
