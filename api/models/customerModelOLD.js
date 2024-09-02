@@ -1,7 +1,7 @@
 import db from '../config/db.js';
 
 const getAllCustomers = async () => {
-    const [rows] = await db.query('SELECT * FROM customer LIMIT 100');
+    const [rows] = await db.query('SELECT * FROM customer LIMIT 200');
     return rows;
 };
 

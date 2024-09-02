@@ -1,5 +1,5 @@
 import cityModel from '../models/cityModel.js';
-
+console.log('entrei no citymodel')
 export const getAllCities = async (req, res) => {
     try {
         const cities = await cityModel.getAllCities();
