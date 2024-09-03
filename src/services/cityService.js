@@ -2,12 +2,22 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3001/api/cities';
 
-const getCities = async () => {
+const getAllCities = async () => {
     try {
         const response = await axios.get(API_URL);
         return response.data.data;
     } catch (error) {
         console.error("Erro ao buscar cidades:", error);
+        throw error;
+    }
+};
+
+const getCityById = async (id) => {
+    try {
+        const response = await axios.get(`${API_URL}/${id}`);
+        return response.data.data;
+    } catch (error) {
+        console.error(`Erro ao buscar a cidade com id ${id}:`, error);
         throw error;
     }
 };
@@ -28,7 +38,8 @@ const deleteCity = async (id) => {
 };
 
 export default {
-    getCities,
+    getAllCities,
+    getCityById,
     addCity,
     updateCity,
     deleteCity

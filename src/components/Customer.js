@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import customerService from '../services/customerService'; // Adaptar o nome do serviço
+import cityService from '../services/cityService'; // Adaptar o nome do serviço
 import "../styles/customerStyle.css"; // Adaptar o nome da folha de estilo
 import Autocomplete from 'react-autocomplete';
 
@@ -9,7 +10,7 @@ class Customer extends Component {
         this.state = {
             formData: {
                 idcustomer: '',
-                fk_idcity: '',
+                fk_idcity: 0,
                 fk_ididentification: '',
                 fk_idcustomer: '',
                 fk_idclasscustomer: '',
@@ -33,7 +34,9 @@ class Customer extends Component {
             customers: [],
             filteredCustomers: [], // Adicione isto
             searchQuery: '', 
-            notification: { message: '', type: '', showButtons: false, onConfirm: null }
+            notification: { message: '', type: '', showButtons: false, onConfirm: null },
+            cities: [], // Novo estado para armazenar a lista de cidades
+            selectedCity: null // Novo estado para armazenar a cidade selecionada
         };
     }
 
@@ -47,10 +50,18 @@ class Customer extends Component {
       async componentDidMount() {
         try {
             const customers = await customerService.getCustomers(); // Método para buscar todos os clientes
-            this.setState({ customers });
+            const cities = await cityService.getAllCities(); // Busca todas as cidades
+            this.setState({ customers, cities });
+
+            // Se houver um ID de cidade no formData, atualize o estado da cidade selecionada
+            if (this.state.formData.fk_idcity) {
+                const selectedCity = await cityService.getCityById(this.state.formData.fk_idcity);
+                this.setState({ selectedCity });
+            }
         } catch (error) {
-            this.showNotification('Erro ao carregar clientes: ' + error.message, 'error');
+            this.showNotification('Erro ao carregar clientes ou cidades: ' + error.message, 'error');
         }
+
     }
 
     handleSearchChange = (e) => {
@@ -73,11 +84,16 @@ class Customer extends Component {
         }
     };
 
-    handleChange = (e) => {
+    handleChange = async (e) => {
         const { name, value } = e.target;
         this.setState({
             formData: { ...this.state.formData, [name]: value }
         });
+
+        if (name === 'fk_idcity') {
+            const selectedCity = await cityService.getCityById(value);
+            this.setState({ selectedCity });
+        }
     };
 
     handleSubmit = async (e) => {
@@ -110,6 +126,9 @@ class Customer extends Component {
 
     render() {
         const { formData, customers, searchQuery,notification } = this.state;
+        console.log('formData.fk_idcity:', formData.fk_idcity);
+        console.log('Cities:', this.state.cities);
+
         return (
             <div className="customer-container">
                 {notification.message && (
@@ -172,15 +191,27 @@ class Customer extends Component {
 
 
                     <div className="form-group">
-                        <label htmlFor="fk_idcity">City ID:</label>
-                        <input
-                            type="text"
+                        <label htmlFor="fk_idcity">City:</label>
+                        {formData.fk_idcity}
+                        
+                        <select
                             id="fk_idcity"
                             name="fk_idcity"
                             value={formData.fk_idcity}
                             onChange={this.handleChange}
-                        />
-                    </div>
+                        >
+                            <option value="">Select City</option>
+                            {this.state.cities.map((city) => (
+                                <option key={city.idcity} value={city.idcity}>
+                                    {city.name_city}
+                                </option>
+                            ))}
+                        </select>
+                        {/* {this.state.selectedCity && (<p>Selected City: {this.state.selectedCity.namecity}</p>)} */}
+                        {/* {this.state.selectedCity && (<p>Selected City: {this.state.selectedCity.name_city}</p>)} */}
+                        {this.state.selectedCity && (<p>Selected City: {this.state.selectedCity.name_city}</p>)}                          
+                      </div>
+
                     <div className="form-group">
                         <label htmlFor="fk_ididentification">Identification ID:</label>
                         <input
