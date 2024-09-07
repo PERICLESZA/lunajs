@@ -6,6 +6,7 @@ import loginRoutes from './routes/loginRoutes.js'; // Ajuste a extensão para .j
 import classRoutes from './routes/classRoutes.js';
 import countryRoutes from './routes/countryRoutes.js';
 import customerRoutes from './routes/customerRoutes.js';
+import idRoutes from './routes/idRoutes.js';
 
 const app = express();
 app.use(cors());
@@ -18,6 +19,8 @@ app.use('/api/Cities', cityRoutes);
 app.use('/api/classes', classRoutes);
 app.use('/api/countries', countryRoutes);
 app.use('/api/customers', customerRoutes);
+app.use('/api/identifications', idRoutes);
+
 // Adicionar outras rotas
 
 // Iniciar o servidor

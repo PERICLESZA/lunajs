@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import cityService from '../services/cityService';
-import { 
+import idService from '../services/idService';
+import {
     Box, 
     Container, 
     TextField, 
@@ -22,32 +22,32 @@ import {
     DialogContentText, 
     DialogTitle 
 } from '@mui/material';
-// import Grid2 from '@mui/material-next/Grid2';
 import Grid from '@mui/material/Grid';
 import { Edit as EditIcon, Delete as DeleteIcon } from '@mui/icons-material';
 
-class City extends Component {
+class Identification extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            formData: { id: '', name: '' },
-            cities: [],
+            formData: { ididentification: '', nameidentification: '' },
+            identifications: [],
             notification: { message: '', type: '' },
             deleteDialogOpen: false,
-            cityToDelete: null
+            idToDelete: null
         };
     }
 
     componentDidMount() {
-        this.fetchCities();
+        this.fetchIdentifications();
     }
 
-    fetchCities = async () => {
+    fetchIdentifications = async () => {
         try {
-            const cities = await cityService.getAllCities();
-            this.setState({ cities });
+            const identifications = await idService.getAllIdentifications();
+            this.setState({ identifications });
+            
         } catch (error) {
-            this.showNotification('Falha ao buscar cidades: ' + error.message, 'error');
+            this.showNotification('Falha ao buscar identificações: ' + error.message, 'error');
         }
     };
 
@@ -66,31 +66,31 @@ class City extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            if (this.state.formData.id) {
-                await cityService.updateCity(this.state.formData.id, this.state.formData);
-                this.showNotification('Cidade atualizada com sucesso!', 'success');
+            if (this.state.formData.ididentification) {
+                await idService.updateIdentification(this.state.formData.ididentification, this.state.formData);
+                this.showNotification('Identificação atualizada com sucesso!', 'success');
             } else {
-                await cityService.addCity(this.state.formData);
-                this.showNotification('Cidade adicionada com sucesso!', 'success');
+                await idService.addIdentification(this.state.formData);
+                this.showNotification('Identificação adicionada com sucesso!', 'success');
             }
-            this.fetchCities();
-            this.setState({ formData: { id: '', name: '' } });
+            this.fetchIdentifications();
+            this.setState({ formData: { ididentification: '', nameidentification: '' } });
         } catch (error) {
             this.showNotification('Erro: ' + error.message, 'error');
         }
     };
 
-    handleEdit = (city) => {
-        this.setState({ formData: { id: city.idcity, name: city.name_city } });
+    handleEdit = (id) => {
+        this.setState({ formData: { ididentification: id.ididentification, nameidentification: id.nameidentification } });
     };
 
     handleDelete = async () => {
-        const { cityToDelete } = this.state;
-        if (cityToDelete) {
+        const { idToDelete } = this.state;
+        if (idToDelete) {
             try {
-                await cityService.deleteCity(cityToDelete.idcity);
-                this.showNotification('Cidade excluída com sucesso!', 'success');
-                this.fetchCities();
+                await idService.deleteIdentification(idToDelete.ididentification);
+                this.showNotification('Identificação excluída com sucesso!', 'success');
+                this.fetchIdentifications();
             } catch (error) {
                 this.showNotification('Erro: ' + error.message, 'error');
             }
@@ -98,32 +98,32 @@ class City extends Component {
         }
     };
 
-    handleOpenDeleteDialog = (city) => {
-        this.setState({ deleteDialogOpen: true, cityToDelete: city });
+    handleOpenDeleteDialog = (id) => {
+        this.setState({ deleteDialogOpen: true, idToDelete: id });
     };
 
     handleCloseDeleteDialog = () => {
-        this.setState({ deleteDialogOpen: false, cityToDelete: null });
+        this.setState({ deleteDialogOpen: false, idToDelete: null });
     };
 
     render() {
-        const { formData, cities, notification, deleteDialogOpen, cityToDelete } = this.state;
+        const { formData, identifications, notification, deleteDialogOpen, idToDelete } = this.state;
         return (
             <Container maxWidth="md" sx={{ height: '80vh' }}>
                 <Paper elevation={3} sx={{ padding: 2, height: '100%' }}>
                     <Typography variant="h4" component="h2" gutterBottom>
-                        Cities
+                        Identifications
                     </Typography>
                     <Box sx={{ position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1 }}>
                         <form onSubmit={this.handleSubmit}>
                             <Grid container spacing={2} alignItems="center">
                                 <Grid item xs={10}>
                                     <TextField
-                                        label="Cidade"
-                                        name="name"
-                                        value={formData.name}
+                                        label="Identification"
+                                        name="nameidentification"
+                                        value={formData.nameidentification}
                                         onChange={this.handleChange}
-                                        placeholder="Digite o nome da cidade"
+                                        placeholder="Digite o nome da identificação"
                                         fullWidth
                                         required
                                     />
@@ -134,8 +134,9 @@ class City extends Component {
                                         variant="contained"
                                         color="primary"
                                         sx={{ width: '70%', marginLeft:2}}
+
                                     >
-                                        {formData.id ? 'Atualizar' : 'Adicionar'}
+                                        {formData.ididentification ? 'Atualizar' : 'Adicionar'}
                                     </Button>
                                 </Grid>
                             </Grid>
@@ -147,21 +148,21 @@ class City extends Component {
                             <TableHead>
                                 <TableRow sx={{ backgroundColor: '#f0f0f0' }}>
                                     <TableCell>ID</TableCell>
-                                    <TableCell>Nome</TableCell>
-                                    <TableCell>Ações</TableCell>
+                                    <TableCell>Identification</TableCell>
+                                    <TableCell>Actions</TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {cities.length > 0 ? (
-                                    cities.map(city => (
-                                        <TableRow key={city.idcity}>
-                                            <TableCell>{city.idcity}</TableCell>
-                                            <TableCell>{city.name_city}</TableCell>
+                                {identifications.length > 0 ? (
+                                    identifications.map(id => (
+                                        <TableRow key={id.ididentification}>
+                                            <TableCell>{id.ididentification}</TableCell>
+                                            <TableCell>{id.nameidentification}</TableCell>
                                             <TableCell>
-                                                <IconButton onClick={() => this.handleEdit(city)} title="Editar">
+                                                <IconButton onClick={() => this.handleEdit(id)} title="Editar">
                                                     <EditIcon />
                                                 </IconButton>
-                                                <IconButton onClick={() => this.handleOpenDeleteDialog(city)} title="Excluir">
+                                                <IconButton onClick={() => this.handleOpenDeleteDialog(id)} title="Excluir">
                                                     <DeleteIcon />
                                                 </IconButton>
                                             </TableCell>
@@ -169,7 +170,7 @@ class City extends Component {
                                     ))
                                 ) : (
                                     <TableRow>
-                                        <TableCell colSpan={3}>Nenhuma cidade encontrada.</TableCell>
+                                        <TableCell colSpan={3}>Nenhuma identificação encontrada.</TableCell>
                                     </TableRow>
                                 )}
                             </TableBody>
@@ -184,7 +185,7 @@ class City extends Component {
                     <DialogTitle>Confirmar Exclusão</DialogTitle>
                     <DialogContent>
                         <DialogContentText>
-                            Tem certeza que deseja excluir a cidade "{cityToDelete?.name_city}"?
+                            Tem certeza que deseja excluir a identificação "{idToDelete?.nameidentification}"?
                         </DialogContentText>
                     </DialogContent>
                     <DialogActions>
@@ -211,4 +212,4 @@ class City extends Component {
     }
 }
 
-export default City;
+export default Identification;
