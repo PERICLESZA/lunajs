@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import customerService from '../services/customerService';
 import cityService from '../services/cityService';
+import idService from '../services/idService';
 import Autosuggest from 'react-autosuggest'; 
-import { TextField, Button, Select, MenuItem, Container, Snackbar, Alert, Typography, Box } from '@mui/material';
+import { FormControl, TextField, Button, Select, MenuItem, Container, Snackbar, Alert, Typography, Box, InputLabel } from '@mui/material';
 import Grid from '@mui/material/Grid';
 
 class Customer extends Component {
@@ -37,7 +38,9 @@ class Customer extends Component {
             searchQuery: '', 
             notification: { message: '', type: '', showButtons: false, onConfirm: null },
             cities: [],
-            selectedCity: null
+            ids:[],
+            selectedCity: null,
+            selectedId: null
         };
     }
 
@@ -52,12 +55,19 @@ class Customer extends Component {
         try {
             const customers = await customerService.getCustomers();
             const cities = await cityService.getAllCities();
-            this.setState({ customers, cities });
+            const ids = await idService.getAllIdentifications();
+            
+            this.setState({ customers, cities, ids });
 
             if (this.state.formData.fk_idcity) {
                 const selectedCity = await cityService.getCityById(this.state.formData.fk_idcity);
                 this.setState({ selectedCity });
             }
+            if (this.state.formData.fk_ididentification) {
+                const selectedId = await idService.getIdentificationById(this.state.formData.fk_ididentification);
+                this.setState({ selectedId });
+            }
+            
         } catch (error) {
             this.showNotification('Erro ao carregar clientes ou cidades: ' + error.message, 'error');
         }
@@ -108,6 +118,10 @@ class Customer extends Component {
         if (name === 'fk_idcity') {
             const selectedCity = await cityService.getCityById(value);
             this.setState({ selectedCity });
+        }
+        if (name === 'fk_ididentification') {
+            const selectedId = await idService.getIdentidicationById(value);
+            this.setState({ selectedId });
         }
     };
 
@@ -235,29 +249,66 @@ class Customer extends Component {
                                 />
                             </Grid>
                             <Grid item xs={6}>
-                                <Select
-                                    label="City"
-                                    name="fk_idcity"
-                                    value={formData.fk_idcity}
-                                    onChange={this.handleChange}
-                                    fullWidth
-                                >
-                                    <MenuItem value="">Select City</MenuItem>
-                                    {this.state.cities.map((city) => (
-                                        <MenuItem key={city.idcity} value={city.idcity}>
-                                            {city.name_city}
-                                        </MenuItem>
-                                    ))}
-                                </Select>
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel
+                                            id="id-label"
+                                            sx={{
+                                                backgroundColor: 'white',
+                                                paddingX: 0.5,
+                                                position: 'absolute',
+                                                top: '-2px', // Ajuste conforme necessário
+                                                left: '8px', // Ajuste conforme necessário
+                                                fontSize: '14px',
+                                                transform: 'translateY(-50%)',
+                                            }}
+                                        >City
+                                    </InputLabel>                                    
+                                    <Select
+                                        name="fk_idcity"
+                                        value={formData.fk_idcity}
+                                        onChange={this.handleChange}
+                                        fullWidth
+                                    >
+                                        <MenuItem value="">Select City</MenuItem>
+                                        {this.state.cities.map((city) => (
+                                            <MenuItem key={city.idcity} value={city.idcity}>
+                                                {city.name_city}
+                                            </MenuItem>
+                                        ))}
+                                    </Select>
+                                </FormControl>
                             </Grid>
+                            
                             <Grid item xs={6}>
-                                <TextField
-                                    label="Identification ID"
+                                <FormControl fullWidth variant="outlined">
+                                    <InputLabel
+                                            id="id-label"
+                                            sx={{
+                                                backgroundColor: 'white',
+                                                paddingX: 0.5,
+                                                position: 'absolute',
+                                                top: '-2px', // Ajuste conforme necessário
+                                                left: '8px', // Ajuste conforme necessário
+                                                fontSize: '14px',
+                                                transform: 'translateY(-50%)',
+                                            }}
+                                        >
+                                            Identification
+                                    </InputLabel>                                    
+                                    <Select
                                     name="fk_ididentification"
                                     value={formData.fk_ididentification}
                                     onChange={this.handleChange}
                                     fullWidth
-                                />
+                                >
+                                    <MenuItem value="">Select Id</MenuItem>
+                                    {this.state.ids.map((identification) => (
+                                        <MenuItem key={identification.ididentification} value={identification.ididentification}>
+                                            {identification.nameidentification}
+                                        </MenuItem>
+                                    ))}
+                                    </Select>
+                                </FormControl>
                             </Grid>
                             <Grid item xs={6}>
                                 <TextField

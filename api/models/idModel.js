@@ -12,7 +12,7 @@ const getAllIdentifications = async () => {
 
 const getIdentificationById = async (id) => {
     try {
-        const [rows] = await db.query('SELECT * FROM identification WHERE idIdentification = ?', [id]);
+        const [rows] = await db.query('SELECT * FROM identification WHERE ididentification = ?', [id]);
         return rows[0];
     } catch (err) {
         console.error('Erro ao buscar identificação por ID:', err);
